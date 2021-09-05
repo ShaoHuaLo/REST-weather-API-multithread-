@@ -1,4 +1,4 @@
-package com.willy.restAPI.demo.entity;
+package com.willy.restAPI.demo.DTO;
 
 import lombok.Data;
 
