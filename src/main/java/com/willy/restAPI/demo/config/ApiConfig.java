@@ -1,11 +1,12 @@
 package com.willy.restAPI.demo.config;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.concurrent.Executor;
-import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 @Configuration
@@ -13,13 +14,18 @@ public class ApiConfig {
 
     @Bean
     public Executor executor() {
-        System.out.println("executor is created!!!");
-        return Executors.newFixedThreadPool(5);
+        return Executors.newCachedThreadPool();
     }
 
     @Bean
     public RestTemplate restTemplate() {
-        System.out.println("template is created!!!");
         return new RestTemplate();
+    }
+
+    @Bean
+    public ObjectMapper objectMapper() {
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        return mapper;
     }
 }
