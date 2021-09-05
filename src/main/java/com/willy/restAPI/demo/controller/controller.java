@@ -21,6 +21,7 @@ public class controller {
     @GetMapping("/location/{id}")
     @JsonIgnoreProperties(ignoreUnknown = true)
     public SimpleWeatherData getLondon(@PathVariable int id) throws Throwable {
+
         String londonUrl = "https://www.metaweather.com/api/location/" + id + "/";
         CompletableFuture<ResponseEntity<SimpleWeatherData>> weatherFuture = CompletableFuture.supplyAsync(() -> {
             System.out.println(Thread.currentThread().getId() + " is working on location_id = " + id);
@@ -28,6 +29,8 @@ public class controller {
             return response;
         }, executor);
 
+        // since Future.get() is blocking method
+        // should use callback (thenApply etc) or while-loop (!isDone()) ???
         while (!weatherFuture.isDone()) {
 
         }
