@@ -8,6 +8,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
+import java.util.logging.Logger;
 
 @Configuration
 public class ApiConfig {
@@ -27,5 +28,10 @@ public class ApiConfig {
         ObjectMapper mapper = new ObjectMapper();
         mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         return mapper;
+    }
+
+    @Bean
+    public Logger logger() {
+        return Logger.getLogger(this.getClass().getName());
     }
 }

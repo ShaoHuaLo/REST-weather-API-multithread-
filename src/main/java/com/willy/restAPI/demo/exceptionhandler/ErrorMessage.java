@@ -1,12 +1,16 @@
 package com.willy.restAPI.demo.exceptionhandler;
 
-import lombok.Builder;
 import lombok.Data;
 
 @Data
-@Builder
 public class ErrorMessage {
-    private int status;
-    private String message;
-    private long timeStamp;
+    private final String message;
+    private final long timeStamp;
+    private final String type;
+
+    public ErrorMessage(Throwable ex) {
+        this.message = ex.getMessage();
+        this.timeStamp = System.currentTimeMillis();
+        this.type = ex.getClass().getSimpleName();
+    }
 }

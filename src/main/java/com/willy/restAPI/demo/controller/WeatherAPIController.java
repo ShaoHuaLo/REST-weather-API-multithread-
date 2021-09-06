@@ -4,19 +4,21 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.willy.restAPI.demo.dto.ConsolidatedWeather;
 import com.willy.restAPI.demo.dto.LocationDto;
 import com.willy.restAPI.demo.dto.LocationSearchDto;
-import com.willy.restAPI.demo.dto.SimpleWeatherDto;
+import com.willy.restAPI.demo.exceptionhandler.exception.BadInputException;
 import com.willy.restAPI.demo.service.WeatherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.IOException;
-import java.util.concurrent.ExecutionException;
 
 @RestController
 @RequestMapping("/api")
 public class WeatherAPIController {
-    @Autowired
     private WeatherService service;
+
+    @Autowired
+    public WeatherAPIController(WeatherService service) {
+        this.service = service;
+    }
 
     @GetMapping(path = "/location/search", params = "query")
     public LocationSearchDto[] getLocationSearch_location(@RequestParam("query") String location) throws JsonProcessingException {
@@ -29,13 +31,13 @@ public class WeatherAPIController {
     }
 
     @GetMapping("/location/{woeid}")
-    public LocationDto getLocation(@PathVariable int woeid) throws ExecutionException, InterruptedException, IOException {
+    public LocationDto getLocation(@PathVariable int woeid) throws JsonProcessingException {
         return service.getLocationById(woeid);
     }
 
     @GetMapping("/location/{id}/{year}/{month}/{day}")
     public ConsolidatedWeather[] getLocationDay(@PathVariable int id, @PathVariable int year,
-                                            @PathVariable int month, @PathVariable int day) throws Throwable{
+                                            @PathVariable int month, @PathVariable int day) throws JsonProcessingException {
         return service.getLocationDay(id, year, month, day);
     }
 
