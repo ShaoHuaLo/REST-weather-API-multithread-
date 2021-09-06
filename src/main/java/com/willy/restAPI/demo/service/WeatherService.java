@@ -4,7 +4,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.willy.restAPI.demo.dto.ConsolidatedWeather;
 import com.willy.restAPI.demo.dto.LocationDto;
 import com.willy.restAPI.demo.dto.LocationSearchDto;
-import com.willy.restAPI.demo.dto.SimpleWeatherDto;
 
 
 public interface WeatherService {

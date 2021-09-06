@@ -4,7 +4,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.willy.restAPI.demo.dto.ConsolidatedWeather;
 import com.willy.restAPI.demo.dto.LocationDto;
 import com.willy.restAPI.demo.dto.LocationSearchDto;
-import com.willy.restAPI.demo.exceptionhandler.exception.BadInputException;
 import com.willy.restAPI.demo.service.WeatherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
