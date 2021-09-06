@@ -2,7 +2,9 @@ package com.willy.restAPI.demo.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.willy.restAPI.demo.dto.ConsolidatedWeather;
-import com.willy.restAPI.demo.dto.SimpleWeatherData;
+import com.willy.restAPI.demo.dto.LocationDto;
+import com.willy.restAPI.demo.dto.LocationSearchDto;
+import com.willy.restAPI.demo.dto.SimpleWeatherDto;
 import com.willy.restAPI.demo.service.WeatherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -17,17 +19,17 @@ public class WeatherAPIController {
     private WeatherService service;
 
     @GetMapping(path = "/location/search", params = "query")
-    public SimpleWeatherData[] getLocationSearch_location(@RequestParam("query") String location) throws JsonProcessingException {
+    public LocationSearchDto[] getLocationSearch_location(@RequestParam("query") String location) throws JsonProcessingException {
         return service.getLocationSearch_Location(location);
     }
 
     @GetMapping(path="/location/search", params="lattlong")
-    public SimpleWeatherData[] getLocationSearch_latt(@RequestParam String lattlong) throws JsonProcessingException {
+    public LocationSearchDto[] getLocationSearch_latt(@RequestParam String lattlong) throws JsonProcessingException {
         return service.getLocationSearch_LattLong(lattlong);
     }
 
     @GetMapping("/location/{woeid}")
-    public SimpleWeatherData getLocation(@PathVariable int woeid) throws ExecutionException, InterruptedException, IOException {
+    public LocationDto getLocation(@PathVariable int woeid) throws ExecutionException, InterruptedException, IOException {
         return service.getLocationById(woeid);
     }
 

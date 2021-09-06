@@ -14,8 +14,10 @@ public class ApiCallerImpl implements ApiCaller{
         this.template = template;
     }
 
+    @Override
     public String call(String url) {
         ResponseEntity<String> jsonString = template.getForEntity(url, String.class);
         return jsonString.getBody();
     }
+
 }
